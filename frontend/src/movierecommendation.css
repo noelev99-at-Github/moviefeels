@@ -1,0 +1,217 @@
+/* App.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Header */
+  .header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .header h1 {
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+  }
+  
+  .header p {
+    font-size: 1.2rem;
+  }
+  
+  /* Content */
+  .content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+  
+  /* Mood Section */
+  .mood-section {
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+  
+  .mood-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  
+/* Mood Button Styling */
+.mood-button {
+    padding: 12px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #888; /* Initially grey */
+}
+
+.mood-button.selected {
+    color: black; /* Turns black when selected */
+}
+
+.mood-button:hover {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+/* Disabled mood buttons (when limit of 5 moods is reached) */
+.mood-button.disabled {
+    background-color: #f2f2f2;
+    cursor: not-allowed;
+}
+  
+  /* Preference Section */
+  .preference-section {
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+  
+  .preference-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .preference-cards {
+      flex-direction: row;
+    }
+  }
+  
+  .preference-card {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .preference-card h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  
+  .preference-card p {
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  /* Personal Section */
+  .personal-section {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+  }
+  
+  .optional-text {
+    color: #777;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-family: inherit;
+  }
+  
+  .recommendation-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .recommendation-button:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+  }
+
+  /* Preference card styles */
+.preference-card {
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid transparent;
+  }
+  
+  /* Non-selected preference card */
+  .preference-card.not-selected {
+    opacity: 0.6;
+    background-color: #f5f5f5;
+    filter: grayscale(30%);
+  }
+  
+  /* Selected preference card */
+  .preference-card.selected {
+    border: 2px solid #3498db;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    transform: translateY(-5px);
+    background-color: #f0f8ff;
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+  
+  /* Add a visual indicator for selected card */
+  .preference-card.selected::after {
+    content: "✓";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #3498db;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Hover effect for both cards */
+  .preference-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }

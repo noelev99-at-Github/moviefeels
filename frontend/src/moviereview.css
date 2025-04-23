@@ -1,0 +1,107 @@
+/* MovieReview.css */
+.movie-review {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+}
+
+.header p {
+  font-size: 1.2rem;
+}
+
+.content {
+  flex: 1;
+  text-align: center;
+}
+
+.search-section {
+  margin: 30px 0; /* Increased space for better separation */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-section input {
+  padding: 12px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  width: 400px; /* Increased width for longer search bar */
+  max-width: 100%;
+  margin-right: 15px; /* More space between input and button */
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-section input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.2);
+}
+
+.search-section button {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-section button:hover {
+  background-color: #2980b9;
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.add-movie {
+  margin-top: 20px;
+}
+
+.add-movie button {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-movie button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+.footer {
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .search-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-section input {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .search-section button {
+    width: 100%;
+  }
+}
