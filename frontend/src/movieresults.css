@@ -1,0 +1,204 @@
+.movie-results {
+    font-family: 'Arial', sans-serif;
+    background: #f5f5f7;
+    color: #333;
+    padding: 3rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.intro-text {
+    text-align: left;
+    margin-bottom: 3rem;
+}
+
+.intro-text h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: #6c5ce7;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    max-width: 1000px;
+    margin: 0;
+    text-align: left;
+}
+
+.results-content {
+    width: 100%;
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Each item occupies one full column */
+    gap: 2.5rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.movie-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row; /* Default for larger screens */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 460px;
+    width: 100%;
+}
+
+.movie-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.movie-image-container {
+    flex-shrink: 0;
+}
+
+.movie-poster {
+    width: 350px; /* Default width for larger screens */
+    height: 460px; /* Fixed height for larger screens */
+    object-fit: cover;
+    border-right: 4px solid #f0f0f0;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.movie-info {
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    flex-grow: 1;
+    background-color: #fafafa;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    text-align: left;
+}
+
+.movie-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.match-score {
+    font-size: 1.1rem;
+    color: #6c5ce7;
+    font-weight: 500;
+}
+
+/* Added styling for the movie description */
+.movie-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin: 0.5rem 0; /* Add some vertical spacing */
+}
+
+
+.moods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.mood-tag {
+    background-color: #e3e3ff;
+    color: #6c5ce7;
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.reviews-section h4 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.review-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.review-item {
+    font-size: 1rem;
+    padding: 10px 15px 10px 40px; /* Increased left padding */
+    color: #444;
+    border-left: 5px solid #6c5ce7;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+.no-reviews {
+    font-size: 0.95rem;
+    color: #999;
+    font-style: italic;
+}
+
+.no-results,
+.empty {
+    text-align: left;
+    font-size: 1.2rem;
+    color: #444;
+    margin-top: 2rem;
+}
+
+/* Footer is not in the latest React code you provided, but keeping the style in case you add it back */
+.footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1rem;
+    color: #777;
+    width: 100%; /* Ensure footer spans full width if needed */
+}
+
+/* Adjustments for smaller screens (<= 900px) */
+@media screen and (max-width: 900px) {
+    .movie-card {
+        flex-direction: column; /* Stack card elements vertically on small screens */
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    .movie-poster {
+        margin-top: 0;
+        width: 100%; /* Make poster width take up full space */
+        height: auto; /* Let height adjust based on the aspect ratio */
+        border-right: none; /* Remove right border in column layout */
+        border-bottom: 4px solid #f0f0f0; /* Add bottom border */
+        border-radius: 18px 18px 0 0; /* Adjust radius for top */
+    }
+
+    .movie-info {
+        padding: 1.5rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 18px;
+        border-bottom-left-radius: 18px;
+    }
+
+    .section-description {
+        font-size: 1rem;
+    }
+
+    .intro-text h2 {
+        font-size: 2rem;
+    }
+}

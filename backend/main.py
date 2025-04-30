@@ -1,11 +1,14 @@
-from fastapi import FastAPI, HTTPException, Depends, UploadFile, File, Form
+from fastapi import FastAPI, HTTPException, Depends, UploadFile, File, Form, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base, selectinload
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, DateTime, select
 from dotenv import load_dotenv
 from datetime import datetime
+from pydantic import BaseModel
+from typing import List
 import os
 import shutil
 import uuid
@@ -72,6 +75,16 @@ class Review(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     movie = relationship("Movie", back_populates="reviews")
+
+# Pydantic models for request validation
+class ReviewCreate(BaseModel):
+    review: str
+
+class MovieRecommendationRequest(BaseModel):
+    moods: list[str]
+    preference: str
+    personalNotes: str
+    timestamp: str
 
 # Dependency
 async def get_db():
@@ -168,13 +181,13 @@ async def create_movie(
             .options(selectinload(Movie.moods), selectinload(Movie.reviews))
         )
         movie = result.scalar_one()
-        latest_review = movie.reviews[0] if movie.reviews else None
 
+        # Return movie with all reviews
         return {
             "id": movie.id,
             "title": movie.title,
             "description": movie.description,
-            "review": latest_review.review if latest_review else None,
+            "reviews": [{"review": review.review, "created_at": review.created_at} for review in movie.reviews],
             "image_url": movie.image_url,
             "created_at": movie.created_at,
             "moods": [m.mood_name for m in movie.moods]
@@ -200,7 +213,7 @@ async def search_movies_by_title(title: str, db: AsyncSession = Depends(get_db))
                 "id": movie.id,
                 "title": movie.title,
                 "description": movie.description,
-                "review": movie.reviews[0].review if movie.reviews else None,
+                "reviews": [{"review": review.review, "created_at": review.created_at} for review in movie.reviews],
                 "image_url": movie.image_url,
                 "created_at": movie.created_at,
                 "moods": [m.mood_name for m in movie.moods]
@@ -210,3 +223,165 @@ async def search_movies_by_title(title: str, db: AsyncSession = Depends(get_db))
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to search movies by title: {str(e)}")
+
+# New endpoint for posting a review to a movie
+@app.post("/api/movies/{movie_id}/reviews")
+async def post_review(
+    movie_id: int, 
+    review_data: ReviewCreate,
+    db: AsyncSession = Depends(get_db)
+):
+    try:
+        # Check if movie exists
+        result = await db.execute(select(Movie).where(Movie.id == movie_id))
+        movie = result.scalar_one_or_none()
+        if not movie:
+            raise HTTPException(status_code=404, detail="Movie not found")
+        
+        # Create new review
+        new_review = Review(
+            movie_id=movie_id,
+            review=review_data.review
+        )
+        
+        db.add(new_review)
+        await db.commit()
+        await db.refresh(new_review)
+        
+        # Return the created review
+        return {
+            "id": new_review.id,
+            "movie_id": new_review.movie_id,
+            "review": new_review.review,
+            "created_at": new_review.created_at
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(status_code=500, detail=f"Failed to post review: {str(e)}")
+    
+    
+# Define the route to receive the POST request for movie recommendations
+@app.post("/movierecommendationuserinput")
+async def receive_user_input(request: MovieRecommendationRequest, db: AsyncSession = Depends(get_db)):
+    print(f"Received data: {request}")
+
+    # Define opposite relationships as a list of pairs
+    # Add all your specific opposite pairs here
+    opposite_pairs = [
+        ("Sad", "Happy"),
+        ("Sad", "Excited"),
+        ("Happy", "Sad"),
+        ("Happy", "Calm / Peaceful"),
+        ("Bored", "Excited"),
+        ("Bored", "Adventurous"),
+        ("Grief", "Optimistic"),
+        ("Grief", "Community Joy"),
+        ("Loneliness", "Community Joy"),
+        ("Loneliness", "Happy"),
+        ("Brokenhearted", "Thrilled"),
+        ("Brokenhearted", "Happy"),
+        ("Stressed", "Relaxed & Carefree"),
+        ("Stressed", "Calm / Peaceful"),
+        ("Scared", "Adventurous"),
+        ("Scared", "Calm / Peaceful"),
+        ("Angry", "Calm / Peaceful"),
+        ("Angry", "Relaxed & Carefree"),
+        ("Magical", "Bored"),
+        ("Magical", "Realistic"),
+        ("Romance", "Adventurous"),
+        ("Hopeless", "Optimistic"),
+        ("Hopeless", "Adventurous"),
+        ("Nostalgia", "Adventurous"),
+        ("Nostalgia", "Focused on Future")
+    ]
+
+    try:
+        # Ensure the Movie model includes a 'description' column/attribute
+        result = await db.execute(
+            select(Movie)
+            .options(selectinload(Movie.moods))
+            .options(selectinload(Movie.reviews))
+            # No need to explicitly load description if it's a direct column on Movie
+        )
+        movies = result.scalars().all()
+
+        def get_mood_match_score(movie_moods, user_moods):
+            return len(set(movie_moods) & set(user_moods))
+
+        matched_movies = []
+
+        # Determine moods based on preference
+        if request.preference == 'congruence':
+            user_moods = request.moods
+            print("Congruence selected")
+        elif request.preference == 'incongruence':
+            user_moods = []
+            print("Incongruence selected")
+            # Find opposite moods based on defined pairs
+            for user_selected_mood in request.moods:
+                for mood1, mood2 in opposite_pairs:
+                    if user_selected_mood == mood1:
+                        user_moods.append(mood2)
+                    elif user_selected_mood == mood2:
+                         user_moods.append(mood1)
+
+            # Remove duplicates
+            user_moods = list(set(user_moods))
+
+        else:
+            raise HTTPException(status_code=400, detail="Invalid preference selected")
+
+        for movie in movies:
+            movie_moods = [m.mood_name for m in movie.moods]
+            score = get_mood_match_score(movie_moods, user_moods)
+            if score > 0:
+                matched_movies.append({
+                    "id": movie.id,
+                    "title": movie.title,
+                    "image_url": movie.image_url,
+                    "description": movie.description, # Added movie description here
+                    "moods": movie_moods,
+                    "reviews": [review.review for review in movie.reviews],
+                    "match_score": score
+                })
+
+        matched_movies.sort(key=lambda x: x["match_score"], reverse=True)
+
+        return {
+            "message": f"{request.preference.capitalize()} movies found",
+            "movies": matched_movies
+        }
+
+    except Exception as e:
+        # Log the error details for debugging
+        print(f"An error occurred: {e}")
+        import traceback
+        traceback.print_exc()
+
+        raise HTTPException(status_code=500, detail=f"Failed to fetch movie recommendations: {str(e)}")
+    
+
+# Serve static files from the 'uploaded_images' folder
+app.mount("/static", StaticFiles(directory="uploaded_images"), name="static")
+
+@app.get("/static/uploaded_images/{image_filename}")
+async def get_image(image_filename: str):
+    # Define the relative path to the uploaded images folder
+    UPLOADS_DIR = os.path.join(os.getcwd(), 'uploaded_images')  # relative path
+    
+    # Construct the full file path
+    file_path = os.path.join(UPLOADS_DIR, image_filename)
+    
+    # Check if the file exists before returning it
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    else:
+        return {"error": "Image not found"}
+
+    
+# To run the app, use `uvicorn main:app --reload`
+
+
