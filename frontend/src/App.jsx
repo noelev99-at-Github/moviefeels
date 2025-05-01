@@ -26,11 +26,11 @@ function App() {
         </header>
         
         <div className="content">
-          <button className="button" onClick={() => navigate('/movierecommendation')}>
+          <button className="recobutton" onClick={() => navigate('/movierecommendation')}>
             Get Some Movie Recommendations
           </button>
           
-          <button className="button" onClick={() => navigate('/moviereview')}>
+          <button className="searchbutton" onClick={() => navigate('/moviereview')}>
             Movie Search And Review
           </button>
         </div>

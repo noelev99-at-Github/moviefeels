@@ -22,7 +22,7 @@ function MovieResults({ formData }) {
               <div key={movie.id} className="movie-card">
                 <div className="movie-image-container">
                   <img
-                    src={`http://localhost:8000/static/${movie.image_url.replace('/uploaded_images/', '')}`} // Remove '/uploaded_images/' from the URL
+                    src={`http://localhost:8000/static/${movie.image_url.replace('/uploaded_images/', '')}`}
                     alt={movie.title}
                     className="movie-poster"
                   />
@@ -31,8 +31,6 @@ function MovieResults({ formData }) {
                   <h3 className="movie-title">{movie.title}</h3>
                   <p className="match-score">🎯 Match Score: <strong>{movie.match_score}</strong></p>
 
-                  {/* Added placeholder for movie description */}
-                  {/* Make sure your backend includes 'description' in the movie object */}
                   {movie.description && <p className="movie-description">{movie.description}</p>}
 
                   <div className="moods">
@@ -43,13 +41,15 @@ function MovieResults({ formData }) {
 
                   <div className="reviews-section">
                     <h4>🗣️ Reviews</h4>
-                    <br></br>
+                    <br />
                     {movie.reviews && movie.reviews.length > 0 ? (
-                      <ul className="review-list">
-                        {movie.reviews.map((review, idx) => (
-                          <li key={idx} className="review-item">"{review}"</li>
-                        ))}
-                      </ul>
+                      <div className="review-scroll-container">
+                        <ul className="review-list">
+                          {movie.reviews.map((review, idx) => (
+                            <li key={idx} className="review-item">"{review}"</li>
+                          ))}
+                        </ul>
+                      </div>
                     ) : (
                       <p className="no-reviews">No reviews available.</p>
                     )}
@@ -62,11 +62,6 @@ function MovieResults({ formData }) {
           <p className="no-results">No matching movies found for your selection.</p>
         )}
       </main>
-
-      {/* Footer removed based on previous code, add back if needed */}
-      {/* <footer className="footer">
-        © 2025 Movie Feels. All rights reserved.
-      </footer> */}
     </div>
   );
 }

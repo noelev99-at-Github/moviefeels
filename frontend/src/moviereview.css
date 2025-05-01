@@ -50,7 +50,7 @@
 .search-section button {
   padding: 12px 25px;
   font-size: 1.1rem;
-  background-color: #3498db;
+  background-color: skyblue;
   color: white;
   border: none;
   border-radius: 6px;
@@ -59,7 +59,7 @@
 }
 
 .search-section button:hover {
-  background-color: #2980b9;
+  background-color: skyblue;
   transform: scale(1.05); /* Slightly enlarge the button on hover */
 }
 
@@ -70,7 +70,7 @@
 .add-movie button {
   padding: 12px 25px;
   font-size: 1.1rem;
-  background-color: #e74c3c;
+  background-color: mediumseagreen;
   color: white;
   border: none;
   border-radius: 6px;
@@ -79,15 +79,8 @@
 }
 
 .add-movie button:hover {
-  background-color: #c0392b;
+  background-color: mediumseagreen;
   transform: scale(1.05);
-}
-
-.footer {
-  background-color: #2c3e50;
-  color: white;
-  padding: 15px;
-  text-align: center;
 }
 
 @media (max-width: 768px) {

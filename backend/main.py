@@ -295,7 +295,6 @@ async def receive_user_input(request: MovieRecommendationRequest, db: AsyncSessi
         ("Hopeless", "Optimistic"),
         ("Hopeless", "Adventurous"),
         ("Nostalgia", "Adventurous"),
-        ("Nostalgia", "Focused on Future")
     ]
 
     try:
@@ -342,7 +341,7 @@ async def receive_user_input(request: MovieRecommendationRequest, db: AsyncSessi
                     "id": movie.id,
                     "title": movie.title,
                     "image_url": movie.image_url,
-                    "description": movie.description, # Added movie description here
+                    "description": movie.description, 
                     "moods": movie_moods,
                     "reviews": [review.review for review in movie.reviews],
                     "match_score": score
@@ -380,7 +379,6 @@ async def get_image(image_filename: str):
         return FileResponse(file_path)
     else:
         return {"error": "Image not found"}
-
     
 # To run the app, use `uvicorn main:app --reload`
 
