@@ -8,6 +8,12 @@ function MovieResults({ formData }) {
 
   const { message, movies } = formData;
 
+  // Check if ALL movies have match_score === 1
+  const allAreOnes = movies.every(movie => movie.match_score === 1);
+
+  // If not all are 1, filter out the ones that are 1
+  const filteredMovies = allAreOnes ? movies : movies.filter(movie => movie.match_score !== 1);
+
   return (
     <div className="movie-results">
       <main className="results-content">
@@ -16,9 +22,9 @@ function MovieResults({ formData }) {
           <p className="section-description">{message}. Here are some movies we think you'll enjoy based on your mood.</p>
         </section>
 
-        {movies && movies.length > 0 ? (
+        {filteredMovies && filteredMovies.length > 0 ? (
           <div className="movies-grid">
-            {movies.map((movie) => (
+            {filteredMovies.map((movie) => (
               <div key={movie.id} className="movie-card">
                 <div className="movie-image-container">
                   <img

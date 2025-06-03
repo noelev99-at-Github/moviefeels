@@ -98,3 +98,14 @@
     width: 100%;
   }
 }
+.homepage-link {
+  text-decoration: underline;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.homepage-link:hover {
+  color: black; 
+  text-decoration: underline;
+}

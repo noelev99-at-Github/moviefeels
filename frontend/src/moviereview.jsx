@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './moviereview.css';
 import AddMovie from './addmovie';
 import DisplayMovieSearch from './displaymoviesearch';
+import { Link } from 'react-router-dom';
 
 function MovieReview() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -57,10 +58,13 @@ function MovieReview() {
   return (
     <div className="movie-review">
       <header className="header">
-        <h1>Movie Feels...</h1>
+        <h1>
+          <Link to="/" className="homepage-link">
+            Movie Feels...
+          </Link>
+        </h1>
         <p>A website that provides movie recommendations tailored to what you need</p>
       </header>
-
       <div className="content">
         <h2>Movie Review</h2>
         <p className="no-results">
@@ -102,7 +106,7 @@ function MovieReview() {
       <AddMovie showModal={showAddMovie} onClose={() => setShowAddMovie(false)} />
 
       <footer className="footer">
-        <p>&copy; 2025 Movie Feels. All rights reserved.</p>
+        
       </footer>
     </div>
   );

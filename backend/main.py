@@ -269,7 +269,7 @@ async def receive_user_input(request: MovieRecommendationRequest, db: AsyncSessi
     print(f"Received data: {request}")
 
     # Define opposite relationships as a list of pairs
-    # Add all your specific opposite pairs here
+    # Add all specific opposite pairs here
     opposite_pairs = [
         ("Sad", "Happy"),
         ("Sad", "Excited"),

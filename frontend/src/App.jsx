@@ -2,7 +2,7 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import { useNavigate, Route, BrowserRouter, Routes } from 'react-router-dom';  // Add Route, BrowserRouter, and Routes
+import { useNavigate, Link, Route, BrowserRouter, Routes } from 'react-router-dom';  // Add Route, BrowserRouter, and Routes
 
 // Your MovieRecommendation component
 function MovieRecommendation() {
@@ -21,7 +21,11 @@ function App() {
     <>
       <div className="app">
         <header className="header">
-          <h1>Movie Feels...</h1>
+        <h1>
+          <Link to="/" className="homepage-link">
+            Movie Feels...
+          </Link>
+        </h1>
           <p>A website that provides movie recommendations tailored to what you need</p>
         </header>
         
@@ -38,7 +42,7 @@ function App() {
         
         
         <footer className="footer">
-          <p>&copy; 2025 Movie Feels. All rights reserved.</p>
+          
         </footer>
       </div>
     </>

@@ -55,10 +55,6 @@
     transition: background-color 0.3s ease;
   }
   
-  .submit-button:hover {
-    background-color: #c0392b;
-  }
-  
   .modal-backdrop {
     position: fixed;
     top: 0;

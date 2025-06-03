@@ -195,3 +195,16 @@
     transform: translateY(-3px);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   }
+
+  .homepage-link {
+    text-decoration: underline;
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .homepage-link:hover {
+    color: black; 
+    text-decoration: underline;
+  }
+  

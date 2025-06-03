@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './movierecommendation.css';
 import MovieResults from './movieresults.jsx';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [selectedMoods, setSelectedMoods] = useState([]);
@@ -71,10 +72,14 @@ function App() {
 
   return (
     <div className="app">
-      <header className="header">
-        <h1>Movie Feels...</h1>
-        <p>A website that provides movie recommendations tailored to what you need</p>
-      </header>
+        <header className="header">
+        <h1>
+          <Link to="/" className="homepage-link">
+            Movie Feels...
+          </Link>
+        </h1>
+          <p>A website that provides movie recommendations tailored to what you need</p>
+        </header>
 
       <div className="content">
         {!submitted ? (
@@ -140,7 +145,7 @@ function App() {
       </div>
 
       <footer className="footer">
-        <p>&copy; 2025 Movie Feels. All rights reserved.</p>
+        
       </footer>
     </div>
   );
