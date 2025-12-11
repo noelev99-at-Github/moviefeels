@@ -1,0 +1,349 @@
+/* -------- GLOBAL STYLES -------- */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #0b0c1a;
+  overflow-x: hidden;
+  color: #fff;
+}
+
+/* -------- PAGE BACKGROUND UNIVERSE -------- */
+.movie-recommendation-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 10px;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #2a1a4b, #0b0c1a, #120b2e);
+  position: relative;
+}
+
+.movie-recommendation-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 10px 10px;
+  opacity: 0.05;
+  animation: twinkle 5s infinite alternate;
+  pointer-events: none;
+}
+
+
+@keyframes twinkle {
+  0% { opacity: 0.05; }
+  50% { opacity: 0.1; }
+  100% { opacity: 0.05; }
+}
+
+/* -------- FORM CONTAINER BOX -------- */
+.form-container {
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 40px; /* space between sections */
+  z-index: 2;
+}
+
+/* Headings */
+.form-container h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #eee;
+}
+
+.selection-count {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* -------- MOOD GRID -------- */
+.mood-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  justify-items: center;
+}
+
+.mood-button {
+  width: 100%; /* uniform width */
+  padding: 10px 0;
+  border-radius: 20px;
+  border: 2px solid #ff2dcb;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.mood-button.selected {
+  background: #ff2dcb;
+  color: #120b2e;
+}
+
+.mood-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mood-button:hover:not(.disabled):not(.selected) {
+  background: #ff2dcb;
+  color: #fff;
+}
+
+/* -------- PREFERENCE CARDS -------- */
+.preference-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.preference-cards {
+  display: flex;
+  justify-content: space-between; /* side by side */
+  gap: 15px;
+  flex-wrap: nowrap; /* always side by side */
+}
+
+.preference-card {
+  flex: 1;
+  min-width: 150px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.preference-card.selected {
+  background: #00ffe0;
+  color: #120b2e;
+  box-shadow: 0 5px 15px rgba(0, 255, 224, 0.3);
+}
+
+.preference-card h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.preference-card p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* -------- PERSONAL NOTES -------- */
+.personal-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.personal-section textarea {
+  width: 100%;               /* still full width */
+  max-width: 100%;           /* ensures it doesn't exceed container */
+  box-sizing: border-box;    /* include padding & border inside width */
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  resize: none;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+
+.personal-section textarea:focus {
+  outline: none;
+  border-color: #00ffe0;
+  box-shadow: 0 0 10px rgba(0, 255, 224, 0.3);
+
+}
+
+/* -------- BUTTONS -------- */
+.recommendation-button,
+.btn-secondary {
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.25s ease;
+}
+
+.recommendation-button {
+  background: #00ffe0;
+  color: #120b2e;
+  box-shadow: 0 2px 6px rgba(0, 255, 224, 0.3);
+  align-self: center;
+}
+
+.recommendation-button:hover {
+  background: #ffc1d4;
+  color: #120b2e;
+}
+
+.btn-secondary {
+  background: #ff2dcb;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #ff6fcf;
+}
+
+.recommendation-buttonSearch {
+  position: relative;
+  width: 100px;          /* Bigger size */
+  height: 100px;         /* Bigger size */
+  border-radius: 50%;    /* Full circle */
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-weight: bold;
+  font-size: 16px;       /* Slightly larger text */
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 20px auto;     /* Centers the button horizontally */
+
+  /* Glass bubble radial gradient */
+  background: radial-gradient(
+    circle,
+    rgba(200,120,255,0.4),
+    rgba(120,180,255,0.3),
+    rgba(255,180,200,0.25),
+    transparent
+  );
+  backdrop-filter: blur(18px);
+  box-shadow: 0 0 35px rgba(150, 150, 255, 0.25);
+
+  /* Breathing animation */
+  animation: bubble-breathe 12s ease-in-out infinite;
+  transition: all 0.25s ease;
+}
+
+/* Breathing animation keyframes */
+@keyframes bubble-breathe {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Hover effect */
+.recommendation-buttonSearch:hover {
+  background: radial-gradient(
+    circle,
+    rgba(200,120,255,0.6),
+    rgba(120,180,255,0.5),
+    rgba(255,180,200,0.4),
+    transparent
+  );
+  box-shadow: 0 0 50px rgba(200, 150, 255, 0.5);
+  color: #fff;
+}
+
+
+/* -------- RESULTS SECTION -------- */
+.results-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.results-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* -------- RESPONSIVE -------- */
+@media (max-width: 900px) {
+  .form-container {
+    padding: 30px 60px;
+  }
+  .mood-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+  .preference-cards {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mood-grid {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  }
+  .preference-card {
+    font-size: 12px;
+    padding: 15px;
+  }
+  .personal-section textarea {
+    font-size: 13px;
+  }
+}
+
+.back-button {
+  align-self: flex-start;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.recommendation-buttonSearch:disabled {
+  cursor: not-allowed;
+  opacity: 0.6; /* optional: visually indicate it's disabled */
+}
+
+.recommendation-buttonSearch {
+  position: relative;
+  z-index: 2;
+  width: 140px;       /* slightly bigger button initially */
+  height: 140px;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+  background: radial-gradient(circle, rgba(200,120,255,0.4), rgba(120,180,255,0.3), rgba(255,180,200,0.25), transparent);
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.recommendation-buttonSearch.explode {
+  animation: expand-screen 2s forwards;
+}
+
+@keyframes expand-screen {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(6); /* bigger slow expansion */
+  }
+  100% {
+    transform: scale(100); /* fills almost entire screen */
+  }
+}
+

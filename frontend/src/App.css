@@ -1,0 +1,181 @@
+/* -------- GLOBAL -------- */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #0b0c1a;
+  overflow-x: hidden;
+  color: #fff;
+}
+
+/* -------- BACKGROUND UNIVERSE -------- */
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #2a1a4b, #0b0c1a, #120b2e); /* more vibrant gradient */
+  z-index: 0;
+}
+
+/* Stars layer */
+.hero-container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  animation: twinkle 5s infinite alternate;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* subtle star twinkle */
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* Nebula swirl layers for vibrant colors */
+.hero-container::after {
+  content: "";
+  position: absolute;
+  width: 1500px;
+  height: 1500px;
+  top: -400px;
+  left: -400px;
+  filter: blur(150px);
+  animation: swirl 50s infinite linear;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Nebula rotation & scale */
+@keyframes swirl {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.35); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* -------- GLASS BUBBLE -------- */
+/* Circle container (holds static content) */
+.glass-bubble {
+  position: relative;
+  min-width: 550px;
+  min-height: 550px;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 0;
+  pointer-events: auto;
+}
+
+/* Static content inside */
+.bubble-content {
+  position: relative;
+  z-index: 2; /* stays on top */
+}
+
+/* Breathing background using a pseudo-element */
+.glass-bubble::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 35px rgba(150, 150, 255, 0.25);
+  z-index: 1;
+  animation: bubble-breathe 12s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(200,120,255,0.4), rgba(120,180,255,0.3), rgba(255,180,200,0.25), transparent);
+}
+
+/* Breathing animation more pronounced */
+@keyframes bubble-breathe {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); } /* increased scale for more pop */
+  100% { transform: scale(1); }
+}
+
+/* Optional: make it slower for a gentler, noticeable pulse */
+.bubble::before {
+  animation: bubble-breathe 2.5s ease-in-out infinite; /* slightly longer duration */
+}
+
+
+/* Text and buttons styling */
+.title {
+  font-size: 38px;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #ddd;
+  max-width: 320px;
+  margin: 0 auto 25px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn-group button {
+  flex: 1; /* makes all buttons equal width */
+  max-width: 500px; /* optional: limit width so they don’t stretch too much */
+  text-align: center; /* center text inside */
+}
+
+.btn-outline {
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: 2px solid #ff2dcb; /* neon pink */
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn-outline:hover {
+  background: #ff2dcb;
+  color: white;
+}
+
+.btn-primary1 {
+  padding: 10px 22px;
+  border-radius: 25px;
+  background: #00ffe0; 
+  border: none;
+  color: #120b2e;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 255, 224, 0.3); /* subtle base shadow */
+}
+
+.btn-primary1:hover {
+  background: #00d4ff; /* bright cyan */
+  color: #120b2e;
+}
+
+
+
+
+
+

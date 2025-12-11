@@ -1,0 +1,51 @@
+-- Create the Movies table
+CREATE TABLE movies (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  image_url TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the Reviews table
+CREATE TABLE reviews (
+  id SERIAL PRIMARY KEY,
+  movie_id INT REFERENCES movies(id) ON DELETE CASCADE,
+  review TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the Moods table
+CREATE TABLE moods (
+  id SERIAL PRIMARY KEY,
+  mood_name VARCHAR(255) UNIQUE NOT NULL
+);
+
+-- Create the link table for movie moods
+CREATE TABLE movie_moods (
+  movie_id INT REFERENCES movies(id) ON DELETE CASCADE,
+  mood_id INT REFERENCES moods(id) ON DELETE CASCADE,
+  PRIMARY KEY (movie_id, mood_id)
+);
+
+-- Optional: insert predefined moods
+INSERT INTO moods (mood_name) VALUES 
+  ('Sad'), 
+  ('Happy'), 
+  ('Bored'), 
+  ('Grief'), 
+  ('Magical'),
+  ('Excited'), 
+  ('Loneliness'), 
+  ('Romance'), 
+  ('Adventurous'), 
+  ('Brokenhearted'),
+  ('Optimistic'), 
+  ('Thrilled'), 
+  ('Stressed'), 
+  ('Relaxed & Carefree'), 
+  ('Scared'), 
+  ('Angry'), 
+  ('Community Joy'), 
+  ('Hopeless'), 
+  ('Nostalgia');

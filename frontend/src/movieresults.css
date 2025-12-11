@@ -1,0 +1,130 @@
+/* Card container - box around each movie */
+.standalone-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+
+.standalone-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(255, 120, 220, 0.3);
+}
+
+/* Row layout for larger screens */
+@media (min-width: 850px) {
+  .standalone-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+/* Image */
+.standalone-poster-wrap {
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.standalone-poster-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text area next to image */
+.standalone-details {
+  flex: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Shape & spacing improvements */
+.standalone-details h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+
+.standalone-score {
+  color: #ff7cea;
+  font-size: 1.1rem;
+}
+
+.standalone-desc {
+  color: #d3d3d3;
+  line-height: 1.6;
+}
+
+/* Align moods nicely */
+.standalone-moods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.standalone-mood {
+  background-color: rgba(255, 120, 220, 0.2);
+  border: 1px solid rgba(255, 120, 220, 0.4);
+  color: #ff93f1;
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Reviews section adjustments */
+.standalone-reviews h4 {
+  color: #ffbbff;
+  margin-bottom: 0.5rem;
+}
+
+.standalone-reviews ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.standalone-reviews li {
+  padding: 0.7rem 1rem;
+  border-left: 3px solid #ff7cea;
+  color: #ccc;
+}
+
+/* Smaller screens */
+@media (max-width: 900px) {
+  .standalone-card {
+    flex-direction: column;
+  }
+  .standalone-poster-wrap img {
+    height: 300px;
+  }
+}
+
+.standalone-home-btn{
+  align-self: flex-start;
+  margin-bottom: 20px;
+  font-size: 14px;
+  background: #ff2dcb;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.25s ease;
+}
