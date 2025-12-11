@@ -1,4 +1,35 @@
-/* Card container - box around each movie */
+/* === Overall Page Layout === */
+.standalone-results-container {
+  max-width: 1000px; /* Limits the width to make it look tidy */
+  margin: 0 auto; /* Centers the container on the page */
+  padding: 2rem 1rem;
+}
+
+/* Center intro and give breathing space */
+.standalone-intro {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.standalone-intro h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.standalone-intro p {
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+/* === Grid adjustments === */
+.standalone-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Space between movie cards */
+}
+
+/* === Movie Card === */
 .standalone-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -24,11 +55,11 @@
   }
 }
 
-/* Image */
+/* === Poster === */
 .standalone-poster-wrap {
   flex: 1;
   min-width: 250px;
-  max-width: 400px;
+  max-width: 350px; /* Keep images consistent width */
   overflow: hidden;
 }
 
@@ -38,7 +69,7 @@
   object-fit: cover;
 }
 
-/* Text area next to image */
+/* === Text Area === */
 .standalone-details {
   flex: 2;
   padding: 2rem;
@@ -49,7 +80,7 @@
   background: rgba(255, 255, 255, 0.02);
 }
 
-/* Shape & spacing improvements */
+/* Headings & content styling improvements */
 .standalone-details h3 {
   font-size: 1.8rem;
   color: #fff;
@@ -66,7 +97,7 @@
   line-height: 1.6;
 }
 
-/* Align moods nicely */
+/* === Mood Pills === */
 .standalone-moods {
   display: flex;
   flex-wrap: wrap;
@@ -82,7 +113,7 @@
   font-size: 0.9rem;
 }
 
-/* Reviews section adjustments */
+/* === Reviews === */
 .standalone-reviews h4 {
   color: #ffbbff;
   margin-bottom: 0.5rem;
@@ -105,17 +136,33 @@
   color: #ccc;
 }
 
-/* Smaller screens */
+.standalone-no-results {
+  text-align: center;
+  color: #ccc;
+  margin-top: 3rem;
+}
+
+/* === Responsive (Smaller Screens) === */
 @media (max-width: 900px) {
   .standalone-card {
     flex-direction: column;
   }
+
   .standalone-poster-wrap img {
     height: 300px;
   }
+
+  .standalone-details {
+    padding: 1.5rem;
+  }
+
+  .standalone-results-container {
+    padding: 1.5rem 1rem;
+  }
 }
 
-.standalone-home-btn{
+/* === Home Button === */
+.standalone-home-btn {
   align-self: flex-start;
   margin-bottom: 20px;
   font-size: 14px;
@@ -127,4 +174,8 @@
   cursor: pointer;
   font-weight: bold;
   transition: all 0.25s ease;
+}
+
+.standalone-home-btn:hover {
+  background: #ff5ce5;
 }

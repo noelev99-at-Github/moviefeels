@@ -161,7 +161,7 @@ function AddMovieReview({ showModal, onClose }) {
 
           {/* Mood Selection */}
           <div className="mood-section">
-            <h3>After finishing the movie, how did it make you feel? <br/>(Select up to 5)</h3>
+            <h3>How did the movie make you feel? (Select up to 5)</h3>
             <div className="mood-grid">
               {moods.map(mood => (
                 <button
